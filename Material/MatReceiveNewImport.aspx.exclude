@@ -1,0 +1,53 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="MatReceiveNewImport.aspx.cs" Inherits="Material_MatReceiveNewImport" %>
+<%@ MasterType VirtualPath="~/MasterPage.master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+     <div style="background-color: whitesmoke">
+        <telerik:RadButton runat="server" ID="btnBack" Text="Back" Width="80px" OnClick="btnBack_Click"></telerik:RadButton>
+        <telerik:RadButton runat="server" ID="btnSave" Text="Save" Width="80px" OnClick="btnSave_Click"></telerik:RadButton>
+    </div>
+    <div style="margin-top:3px">
+        <telerik:RadGrid ID="GridImport" runat="server" DataSourceID="sqlImportSorce" Height="500px" AllowAutomaticDeletes="True">
+            <GroupingSettings CollapseAllTooltip="Collapse all groups"></GroupingSettings>
+            <ClientSettings>
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" />
+            </ClientSettings>
+            <MasterTableView AutoGenerateColumns="False" DataSourceID="sqlImportSorce">
+                <Columns>
+                    <telerik:GridTemplateColumn ItemStyle-Width="20px" UniqueName="Check_Col">
+                        <ItemTemplate>
+                            <asp:CheckBox ID="CheckBox1" runat="server" Checked="true"/>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridBoundColumn DataField="SRN_NO" FilterControlAltText="Filter SRN_NO column" HeaderText="SRN_NO" SortExpression="SRN_NO" UniqueName="SRN_NO">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="PO_ITEM_NO" FilterControlAltText="Filter PO_ITEM_NO column" HeaderText="PO_ITEM_NO" SortExpression="PO_ITEM_NO" UniqueName="PO_ITEM_NO">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="IRN_NO" FilterControlAltText="Filter IRN_NO column" HeaderText="IRN_NO" SortExpression="IRN_NO" UniqueName="IRN_NO">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="MAT_CODE1" FilterControlAltText="Filter MAT_CODE1 column" HeaderText="MAT_CODE1" SortExpression="MAT_CODE1" UniqueName="MAT_CODE1">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="SRN_QTY" DataType="System.Decimal" FilterControlAltText="Filter SRN_QTY column" HeaderText="SRN_QTY" SortExpression="SRN_QTY" UniqueName="SRN_QTY">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridTemplateColumn DataField="RCV_QTY" DataType="System.Decimal" FilterControlAltText="Filter RCV_QTY column" HeaderText="RCV_QTY" SortExpression="RCV_QTY" UniqueName="RCV_QTY">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="RCV_QTYEditTextBox" runat="server" Text='<%# Bind("RCV_QTY") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                             <asp:TextBox ID="RCV_QTYTextBox" runat="server" Text='<%# Bind("RCV_QTY") %>' Width="80px"></asp:TextBox>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+                </Columns>
+            </MasterTableView>
+        </telerik:RadGrid>
+    </div>
+    <asp:SqlDataSource ID="sqlImportSorce" runat="server" ConnectionString="<%$ ConnectionStrings:ipmsConnectionString %>" ProviderName="<%$ ConnectionStrings:ipmsConnectionString.ProviderName %>" SelectCommand="SELECT * 
+FROM VIEW_SRN_ITEMS_A
+WHERE SRN_NO IN (SELECT SRN_NO FROM PIP_MAT_RECEIVE_SRN WHERE MRV_ID = :MRV_ID)
+ORDER BY SRN_NO, PO_ITEM_NO">
+        <SelectParameters>
+            <asp:QueryStringParameter DefaultValue="-1" Name="MRV_ID" QueryStringField="MAT_RCV_ID" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:HiddenField ID="HiddenPOID" runat="server" />
+</asp:Content>
+

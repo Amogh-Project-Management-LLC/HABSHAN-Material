@@ -1,0 +1,317 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="Amogh_MasterPage" EnableTheming="true" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+    <title></title>
+    <link href="CSS/styles.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
+    <script lang="javascript" type="text/javascript">
+        function OpenModual(page_url, dlgw, dlgh) {
+            var ReturnedValue = showModalDialog(page_url, "Passed String",
+                "dialogWidth:" + dlgw + "px; dialogHeight:" + dlgh + "px; status:no; center:yes");
+        }
+        window.document.title = "Amogh Material Management";
+    </script>
+
+    <telerik:RadCodeBlock runat="server">
+        <script type="text/javascript">
+            function Rebind_Parent(sender, args) {
+                var temp = new Array();
+                var str = document.getElementById('RadGridListHiddenField').value;
+                var str2 = document.getElementById('AspGridListHiddenField').value;
+
+                temp = str.split(",");
+                if (str.length > 0) {
+                    for (var i = 0; i < temp.length; i++) {
+                        var masterTable = $find(temp[i]).get_masterTableView();
+                        masterTable.rebind();
+                    }
+                }
+
+                if (str2.length > 0) {
+                    document.location.reload();
+                }
+            }
+        </script>
+    </telerik:RadCodeBlock>
+
+    <style type="text/css">
+        .table_style {
+            border: none;
+            padding: 0px;
+            border-spacing: 0px;
+            margin: 0px;
+        }
+
+        body {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+
+        #grad {
+            background-color: #c1d7fc;
+            background: -webkit-linear-gradient(left, #96baf4, #dfeafb); /* For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(right, #96baf4, #dfeafb); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(right, #96baf4, #dfeafb); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(to right, #96baf4, #dfeafb); /* Standard syntax */
+        }
+
+        .RadWindowMange {
+            z-index: 7001;
+        }
+
+        .RadWindowMange1 {
+            z-index: 2900;
+        }
+
+        .auto-style1 {
+            width: 100%;
+            /*height: 90px;*/
+            height: 100%;
+        }
+
+        .div_style {
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" runat="server" EnableScriptCombine="true" OutputCompression="AutoDetect">
+            <Scripts>
+                <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.Core.js" />
+                <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQuery.js" />
+                <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQueryInclude.js" />
+            </Scripts>
+        </telerik:RadScriptManager>
+        <telerik:RadWindowManager ID="RadWindowManager1" runat="server" ReloadOnShow="true" CssClass="RadWindowMange">
+        </telerik:RadWindowManager>
+        <telerik:RadStyleSheetManager runat="server" EnableStyleSheetCombine="true" />
+        
+        <div id="PageHeader">
+            <div>
+                <table class="table_style" style="width: 100%;">
+                    <tr>
+                        <td style="width: 33%">
+                            <img src="../Images/new/master-header.png" style="height: 50px; width: 105px" />
+                        </td>
+                        <td style="padding-right: 0px; width: 33%; text-align: center; width: 300px">
+                            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                <ContentTemplate>
+                                    <asp:Label ID="headingMessageLabel" runat="server" Font-Size="Larger" ForeColor="Gray" Font-Bold="true"></asp:Label>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </td>
+                        <td style="padding-right: 10px; text-align: right; width: 150px">
+                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Company_Logo/Client_Logo.png" />
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="grad">
+                <table style="width: 99%; height: 25px;">
+                    <tr>
+                        <td style="width: 30px; padding-left: 5px;">
+                            <a href="../Home/Default.aspx">
+                                <img src="../Images/new/home-icon.png" style="border: none;" />
+                            </a>
+                        </td>
+                        <td style="padding-left: 10px; text-align: left;">
+                            <asp:Label ID="projectLabel" runat="server" Font-Bold="true"></asp:Label>
+                        </td>
+                        <td style="text-align: center">
+                            <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="20">
+                                <ProgressTemplate>
+                                    <img alt="loading" src="../Images/ajax-loader-bar.gif" />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                        </td>
+                        <td>
+                            <%-- <div id="google_translate_element"></div>
+                        <script type="text/javascript">
+                            function googleTranslateElementInit() {
+                                new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+                            }
+                        </script>
+                        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>--%>
+
+                        </td>
+                         <td style="width: 40px; padding-right: 3px; padding-left: 3px;">
+                            <asp:ImageButton ID="PdfUpload" runat="server" ImageUrl="~/Images/New-Icons/pdf.png" ImageAlign="Middle"
+                                OnClick="PdfUpload_Click" ToolTip="Pdf Upload" Visible="false"/>
+                        </td>
+                       
+                      
+                        <td style="width: 100px; text-align: center;">
+                            <telerik:RadDropDownList Enabled="true" ID="ddLang" runat="server" Width="100px" AutoPostBack="true" 
+                                OnDataBound="ddLang_DataBound" OnSelectedIndexChanged="ddLang_SelectedIndexChanged" CausesValidation="False" Visible="false">
+                                <Items>
+                                    <telerik:DropDownListItem Value="en" Text="English" />
+                                    <telerik:DropDownListItem Value="zh" Text="Chinese" />
+                                    <telerik:DropDownListItem Value="vi" Text="Vietnamese" />
+                                    <telerik:DropDownListItem Value="ja" Text="Japanese" />
+                                </Items>
+                            </telerik:RadDropDownList>
+                             <telerik:RadSkinManager ID="RadSkinManager1" runat="server" ShowChooser="true" OnLoad="RadSkinManager1_Load"
+                            PersistenceMode="session" OnPreRender="RadSkinManager1_PreRender">
+                        </telerik:RadSkinManager>
+                        </td>
+
+                        <td style="width: 40px; padding-right: 3px; padding-left: 3px;">
+                            <a href="../Home/Default.aspx">
+                                <img src="../Images/new/home-icon.png" style="border: none;" />
+                            </a>
+                        </td>
+                        <%-- <td style="width: 40px; padding-right: 3px; padding-left: 3px;">
+                        <asp:ImageButton ID="ImageButtonReports" runat="server" ImageUrl="~/Images/icons/report-icon.png" ImageAlign="Middle"
+                            ToolTip="Reports" OnClick="ImageButtonReports_Click" Visible="false" />
+                    </td>
+                    <td style="width: 40px; padding-right: 3px; padding-left: 3px;">
+                        <asp:ImageButton ID="ImageButtonCharts" runat="server" ImageUrl="~/Images/icons/chart-icon.png" ImageAlign="Middle"
+                            ToolTip="Charts" OnClick="ImageButtonCharts_Click" Visible="false" />
+                    </td>--%>
+                        <td style="width: 40px; padding-right: 3px; padding-left: 3px;">
+                            <asp:ImageButton ID="ImageButtonMaterialCatalog" runat="server" ImageUrl="~/Images/icons/material-catalog.png" ImageAlign="Middle"
+                                OnClick="ImageButtonMaterialCatalog_Click" ToolTip="Material Catalog" />
+                        </td>
+                        <td style="width: 40px; padding-right: 3px; padding-left: 3px;">
+                            <asp:ImageButton ID="ImageButtonSetting" runat="server" ImageUrl="~/Images/icons/Setting-icon.png" OnClick="ImageButtonSetting_Click" ToolTip="Setting" />
+                        </td>
+                        <td style="width: 40px; padding-right: 3px; padding-left: 3px;">
+                            <asp:ImageButton ID="ImageItemCodeSearch" runat="server" ImageUrl="~/Images/icons/Search.png" ToolTip="Search Item Code" />
+                        </td>
+                        <%-- <td style="width: 40px; padding-right: 3px; padding-left: 3px;">
+                        <asp:ImageButton ID="ImageButtonUpdates" runat="server" Visible="false" ImageUrl="~/Images/icons/database.png" OnClick="ImageButtonUpdates_Click" ToolTip="Amogh Updates" />
+                    </td>--%>
+                        
+                    </tr>
+                </table>
+            </div>
+
+            <div style="width: 99.8%; border-width: 1px; border-color: gainsboro; border-style: solid;">
+                <telerik:RadMenu ID="RadMenu1" runat="server" Style="z-index: 2400">
+                    <Items>
+                        <telerik:RadMenuItem Text="Procurement" ImageUrl="Images/New-Icons/package.png">
+                            <Items>
+                                <telerik:RadMenuItem Text="Material Requisition" ImageUrl="Images/New-Icons/po.png" NavigateUrl="Procurement/MatRequisition.aspx"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Text="Purchase Order" ImageUrl="Images/New-Icons/po.png" NavigateUrl="Procurement/POMaster.aspx"></telerik:RadMenuItem>
+                                <%--<telerik:RadMenuItem Text="Technical Submission" ImageUrl="Images/New-Icons/po.png" NavigateUrl="Procurement/POTechnicalSubmission.aspx"></telerik:RadMenuItem>--%>
+                                <%--                            <telerik:RadMenuItem Text="Manufacturing Batch Plan" ImageUrl="Images/New-Icons/po.png" NavigateUrl="Procurement/POManufacturing.aspx"></telerik:RadMenuItem>--%>
+                                <%-- <telerik:RadMenuItem Text="Inspection & Certification" ImageUrl="Images/New-Icons/po.png" NavigateUrl="Procurement/POMaster.aspx"></telerik:RadMenuItem>--%>
+                                <telerik:RadMenuItem Text="Manufacturing Batch Plan" ImageUrl="Images/New-Icons/po.png" NavigateUrl="Procurement/POBatchPlan.aspx"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Text="Request For Inspection" ImageUrl="Images/New-Icons/po.png" NavigateUrl="Procurement/POInsp.aspx"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Text="Punch List" ImageUrl="Images/New-Icons/po.png" NavigateUrl="Procurement/POPunchlist.aspx"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Text="Inspection Release Note (IRN)" ImageUrl="Images/New-Icons/po.png" NavigateUrl="Procurement/IRN.aspx"></telerik:RadMenuItem>
+
+                            </Items>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Text="Logistics Control" ImageUrl="Images/New-Icons/cargo-ship.png">
+                            <Items>
+                                <telerik:RadMenuItem Text="Shipment Master" ImageUrl="Images/New-Icons/folder.png" NavigateUrl="Logistics/ShipmentMaster.aspx"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Text="SCN Master" ImageUrl="Images/New-Icons/folder.png" NavigateUrl="Logistics/SCNMaster.aspx"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Text="Packing List" ImageUrl="Images/New-Icons/folder.png"
+                                    NavigateUrl="Logistics/ShippingReleaseNote.aspx">
+                                </telerik:RadMenuItem>
+                            </Items>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Text="Material Management" ImageUrl="Images/New-Icons/pipe.png">
+                            <GroupSettings RepeatColumns="2" RepeatDirection="Vertical" />
+                            <Items>
+                                <telerik:RadMenuItem Text="Material Receipt Report (MRR)" NavigateUrl="~/Material/MatReceive.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="Request For Inspection (RFI)" NavigateUrl="~/Material/MatRFI.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="MRIR" NavigateUrl="~/Material/MatInsp.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="ESD" NavigateUrl="~/Material/MatExceptionRep.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="Material Request/Return" NavigateUrl="~/Material/MaterialRequest.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="Material Transfer (MTN)" NavigateUrl="~/Material/Mat_Transf.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="MTN Receive" NavigateUrl="~/Material/MTNReceive.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <%--<telerik:RadMenuItem Text="Material Issue Voucher Request" NavigateUrl="~/Material/Additional_Mat_Request.aspx" ImageUrl="Images/New-Icons/folder.png" />--%>
+                                <telerik:RadMenuItem Text="Material Issue Voucher" NavigateUrl="~/Material/Additional_Mat.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="Material Return from Site" NavigateUrl="~/Material/MatReturn.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="Pipe Remain Store" NavigateUrl="~/CuttingPlan/PipeRemains.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="Mat Quarantine" NavigateUrl="~/Material/MaterialQuarantine.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="Heat Numbers" NavigateUrl="~/HeatNo/HeatNoIndex.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="Material Test Certificates" NavigateUrl="~/HeatNo/TC_Index.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                                <telerik:RadMenuItem Text="Material Reconciliation" NavigateUrl="~/Material/MaterialStatusReport.aspx" ImageUrl="Images/New-Icons/folder.png" />
+                            </Items>
+                        </telerik:RadMenuItem>
+
+                        <telerik:RadMenuItem Text="Preservation" ImageUrl="Images/New-Icons/preservation.png" Width="130px">
+                            <Items>
+                                <telerik:RadMenuItem ImageUrl="Images/New-Icons/folder.png" Text="Preservation Codes" NavigateUrl="Preservation/PreserveCodes.aspx"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem ImageUrl="Images/New-Icons/folder.png" Text="Material Preservation" NavigateUrl="Preservation/PresDetail.aspx"></telerik:RadMenuItem>
+                            </Items>
+                        </telerik:RadMenuItem>
+
+
+                        <telerik:RadMenuItem Text="Vendors" ImageUrl="Images/New-Icons/vendor.png" Width="100px" NavigateUrl="Vendors/Vendors.aspx"></telerik:RadMenuItem>
+                        <telerik:RadMenuItem Text="Downloads/Reports" ImageUrl="Images/New-Icons/document-save.png">
+                            <Items>
+                                <telerik:RadMenuItem ImageUrl="Images/New-Icons/folder.png" Text="Excel Reports" NavigateUrl="Home/ExportData2.aspx"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem ImageUrl="Images/New-Icons/folder.png" Text="Weekly Basic Reports" NavigateUrl="Home/WeeklyReport.aspx"></telerik:RadMenuItem>
+                            </Items>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Text="Settings" ImageUrl="Images/New-Icons/settings.png" Width="100px">
+                            <Items>
+                                <telerik:RadMenuItem Text="Users" ImageUrl="Images/New-Icons/folder.png" NavigateUrl="Admin/Users.aspx" Visible="false"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Text="Sub Contractors" ImageUrl="Images/New-Icons/folder.png" NavigateUrl="Home/SubContractors.aspx"></telerik:RadMenuItem>
+                                <telerik:RadMenuItem Text="Material Stores" ImageUrl="Images/New-Icons/folder.png" NavigateUrl="Home/MaterialStores.aspx"></telerik:RadMenuItem>
+                            </Items>
+                        </telerik:RadMenuItem>
+                    </Items>
+                </telerik:RadMenu>
+            </div>
+        </div>
+        <div>
+            <table style="width: 100%; border-width: 2px; border-color: gainsboro; border-style: solid;">
+
+                <tr>
+
+                    <td style="vertical-align: top; text-align: left;" class="auto-style1">
+                        <div>
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
+                                    <asp:Panel ID="MessagePanel" runat="server" CssClass="info" Visible="false" EnableViewState="false">
+                                        <asp:Label ID="MsgLabel" runat="server"></asp:Label>
+                                    </asp:Panel>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                        <div class="div_style">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                       
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="footerDiv">
+            <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                <ContentTemplate>
+                    <table style="width: 100%; height: 30px; position: absolute; background-color: gainsboro;">
+                        <tr>
+                            <td>Copyright © 2018, 2022, AMOGH All rights reserved.
+                            </td>
+                            <td style="width: 150px; text-align: right;">
+                                <asp:Label ID="UserNameLablel" runat="server" Font-Bold="False" Font-Size="Medium"></asp:Label>
+                            </td>
+                            <td style="width: 35px;">
+                                <asp:ImageButton ID="ImageButtonUserInfo" runat="server" ImageUrl="~/Images/icons/User-icon-25px.png" OnClick="ImageButtonUserInfo_Click" ToolTip="User Info" />
+                            </td>
+                            <td style="width: 28px;">
+                                <asp:ImageButton ID="ImageButtonLogout" runat="server" ImageUrl="~/Images/icons/exit-icon.png" OnClick="ImageButtonLogout_Click" ToolTip="Logout" />
+                            </td>
+                        </tr>
+                    </table>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+        <asp:HiddenField ID="RadGridListHiddenField" runat="server" />
+        <asp:HiddenField ID="AspGridListHiddenField" runat="server" />
+    </form>
+</body>
+</html>

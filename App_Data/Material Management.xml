@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Tree>
+  <Node text="MRR Details" htmlUrl="https://docs.telerik.com/devtools/aspnet-ajax/controls/grid/overview" />
+  <Node text="RFI Details" htmlUrl="https://docs.telerik.com/devtools/aspnet-ajax/controls/editor/overview" />
+  <Node text="MRIR Details" htmlUrl="https://docs.telerik.com/devtools/aspnet-ajax/controls/scheduler/overview" />
+  <Node text="MR Details" htmlUrl="https://docs.telerik.com/devtools/aspnet-ajax/controls/scheduler/overview" />
+  <Node text="MTN Details" htmlUrl="https://docs.telerik.com/devtools/aspnet-ajax/controls/scheduler/overview" />
+  <Node text="MTN Receive " htmlUrl="https://docs.telerik.com/devtools/aspnet-ajax/controls/scheduler/overview" />
+  <Node text="MIV Details" htmlUrl="https://docs.telerik.com/devtools/aspnet-ajax/controls/scheduler/overview" />
+</Tree>

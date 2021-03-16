@@ -1,0 +1,45 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ReportViewerMasterPage.master.cs" Inherits="ReportViewerMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="CSS/styles.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #heading_div {
+            background-color: #BDE5F8;
+            font-size: large;
+            padding: 3px 3px 3px 3px;
+            text-align: center;
+            border-radius: 5px;
+            border-color: #00529B;
+            border-style: solid;
+            border-width: 1px;
+            margin: 5px;
+            /*box-shadow: 5px 5px 3px #888888;*/
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager ID="RadAjaxManager1" runat="server"></telerik:RadScriptManager>
+        <div id="heading_div" runat="server" visible="false">
+            <asp:Label ID="HeadingMessageLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <asp:Panel ID="MessagePanel" runat="server" CssClass="info" Visible="false" EnableViewState="false">
+                        <asp:Label ID="MsgLabel" runat="server"></asp:Label>
+                    </asp:Panel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </form>
+</body>
+</html>

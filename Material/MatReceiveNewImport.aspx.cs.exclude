@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Telerik.Web.UI;
+
+public partial class Material_MatReceiveNewImport : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            Master.HeadingMessage = "MRR Import <br/>";
+            Master.HeadingMessage += WebTools.GetExpr("MAT_RCV_NO", "PIP_MAT_RECEIVE", " WHERE MAT_RCV_ID='" + Request.QueryString["MAT_RCV_ID"] + "'");
+            HiddenPOID.Value = WebTools.GetExpr("PO_ID", "PIP_MAT_RECEIVE", " WHERE MAT_RCV_ID='" + Request.QueryString["MAT_RCV_ID"] + "'");
+            //Master.HeadingMessage += ")";
+        }
+    }
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+
+
+        string srn_no, po_item_no, irn_no, mat_code1, srn_qty, rcv_qty;
+        string sql, mat_id, mr_item_no, filter;
+        try
+        {
+            foreach (GridDataItem row in GridImport.Items)
+            {
+                CheckBox cb = row["Check_Col"].FindControl("CheckBox1") as CheckBox;
+
+                if (cb.Checked)
+                {
+                    srn_no = row["SRN_NO"].Text;
+                    po_item_no = row["PO_ITEM_NO"].Text;
+                    irn_no = row["IRN_NO"].Text;
+                    mat_code1 = row["MAT_CODE1"].Text;
+                    srn_qty = row["SRN_QTY"].Text;
+                    TextBox t = row["RCV_QTY"].FindControl("RCV_QTYTextBox") as TextBox;
+                    rcv_qty = t.Text;
+
+                    mat_id = WebTools.GetExpr("MAT_ID", "PIP_MAT_STOCK", " WHERE MAT_CODE1='" + mat_code1 + "'");
+                    filter = " WHERE MAT_RCV_ID = '" + Request.QueryString["MAT_RCV_ID"].ToString() + "' AND PO_ITEM = '" + po_item_no + "'";
+                    mr_item_no = WebTools.GetExpr("MR_ITEM", "PIP_MAT_RECEIVE_DETAIL", filter);
+
+                    mr_item_no = mr_item_no == "" ? "1" : (Convert.ToDecimal(mr_item_no) + 1).ToString();
+
+                    sql = "INSERT INTO PIP_MAT_RECEIVE_DETAIL (MAT_RCV_ID, MAT_ID, PO_ITEM, MR_ITEM, RECV_QTY, SRN_NO, IRN_NO) VALUES ";
+                    sql += " ('" + Request.QueryString["MAT_RCV_ID"].ToString() + "', '" + mat_id + "', '" + po_item_no + "', '" + mr_item_no + "', ";
+                    sql += "'" + srn_qty + "','" + rcv_qty + "', '" + srn_no + "', '" + irn_no + "')";
+
+                    WebTools.ExeSql(sql);
+
+
+                }
+            }
+
+            Master.ShowMessage("Data Imported.");
+        }
+        catch (Exception ex)
+        {
+            Master.ShowError(ex.Message);
+        }
+    }
+
+    protected void btnBack_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MatReceiveItems.aspx?MAT_RCV_ID=" + Request.QueryString["MAT_RCV_ID"]);
+    }
+}

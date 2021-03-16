@@ -1,0 +1,140 @@
+﻿body {
+    margin: 0;
+    padding-bottom: 2em;
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: 'Segoe UI', 'Trebuchet MS', Arial;
+    font-size: small;
+    height:900px;
+}
+
+a {
+    color: Blue;
+}
+
+.biglinks {
+    font-size: 11pt;
+    color: Blue;
+}
+
+.LinkButtonStyle {
+    padding: 3px 5px 3px 5px;
+    border: 1px solid #808000;
+    background-color: #E8E8E8;
+    color: #333399;
+}
+
+#content {
+    margin-top: 1em;
+    margin-left: 16em;
+    margin-right: 2em;
+}
+
+h1 {
+    color: #333d84;
+}
+
+#content p {
+    font-size: 80%;
+    line-height: 1.6em;
+}
+
+#content ul {
+    font-size: 80%;
+    line-height: 1.6em;
+}
+
+/* Data Web Control Styles */
+.DataWebControlStyle {
+    border-right: SteelBlue 1px solid;
+    border-top: SteelBlue 1px solid;
+    border-left: SteelBlue 1px solid;
+    border-bottom: SteelBlue 1px solid;
+    font-size: 12px;
+}
+
+.HeaderStyle {
+    background-color: #6699ff;
+    color: white;
+    font-weight: bold;
+}
+
+.AlternatingRowStyle {
+    background-color: #ccccff;
+}
+
+.SelectedRowStyle {
+    background-color: #33ccff;
+}
+
+.TableStyle {
+    font-size: 12px;
+}
+
+.EmptyDataStyle {
+    font-size: 16px;
+    color: #666666;
+}
+
+.MessageLabel {
+    color: Maroon;
+    font-size: 90%;
+}
+
+.PagerStyle {
+    font-weight: bold;
+    color: Blue;
+}
+/* for the calendar control only */
+
+.cssPagerPageLabel {
+    font-size: 11px;
+}
+
+.info, .success, .warning, .error, .validation {
+    border: 1px solid;
+    margin: 10px 0px;
+    padding: 15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.info {
+    color: #00529B;
+    background-color: #BDE5F8;
+    background-image: url('../Images/knob/info.png');
+}
+
+.success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    background-image: url('../Images/knob/Valid-Green.png');
+}
+
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    background-image: url('../Images/knob/Attention.png');
+}
+
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('../Images/knob/Cancel.png');
+}
+
+.validation {
+    color: #D63301;
+    background-color: #FFCCBA;
+    background-image: url('../Images/knob/Remove-Red.png');
+}
+
+.link_button {
+    color: dimgray;
+    font-size: medium;
+    text-underline-position: below;
+}
+
+    .link_button:hover {
+        color: red;
+    }

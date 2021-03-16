@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Tree>
+  <Node    text="MR Details" htmlUrl="https://demos.telerik.com/aspnet-ajax/grid/mobile-examples/overview/default.aspx" />
+  <Node text="PO Details" htmlUrl="https://demos.telerik.com/aspnet-ajax/editor/mobile-examples/overview/default.aspx" />
+  <Node text="Batch Details" htmlUrl="https://demos.telerik.com/aspnet-ajax/scheduler/mobile-examples/overview/default.aspx" />
+  <Node text="IRN Details" htmlUrl="https://demos.telerik.com/aspnet-ajax/scheduler/mobile-examples/overview/default.aspx" />
+  
+</Tree>

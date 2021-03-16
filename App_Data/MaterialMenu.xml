@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+  <Group Flow="Vertical">
+    <Item  Text="Choose  Category">
+      <Group>
+        <Item  Text="Procurement" value="demos" />
+        <Item  Text="Material Management" value="docs" />
+      </Group>
+    </Item>
+    <!--<Item  Text="RadWindow">
+      <Group Width="140" Flow="Vertical">
+        <Item Text="Minimize" value="Minimize" />
+        <Item Text="Restore" value="restore" />
+        <Item Text="Maximize" value="maximize" />
+        <Item Text="Close" value="close" />
+        <Item isSeparator="true" />
+        <Item Text="Cascade" value="cascade" />
+        <Item Text="Minimize All" value="minimizeAll" />
+        <Item Text="Restore All" value="restoreAll" />
+        <Item Text="Show All" value="showAll" />
+        <Item Text="Close All" value="closeAll" />
+
+
+      </Group>
+    </Item>-->
+  </Group>
+</Menu>
